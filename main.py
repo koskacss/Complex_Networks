@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import os
 import time
 import itertools
+import networkx.algorithms.community as nx_communities
 
 from math import sqrt
 
@@ -42,22 +43,38 @@ def get_new_component(G, most_valuable_edge):
         edge = most_valuable_edge(G)
         G.remove_edge(*edge)
         new_components = tuple(nx.connected_components(G))
+        
         number_of_new_components = len(new_components)
 
     return new_components
 
 
-def GW_alg_demo():
-    k = 1
-    G = nx.barbell_graph(8, 5)
+def GW_alg_demo(mode):
+    Q = 0.0
+    step = 1
+    n = int(input("\nAmount of verticies in each group (2<=n<=30): "))
+    if(n > 30):
+    	n/=30
+    G = nx.barbell_graph(n, 5)
     nx.draw(G, with_labels=True, font_weight='bold')
+    k = 2*n+4 
     comp = girvan_newman_algorithm(G)
-    for communities in itertools.islice(comp, G.number_of_edges()):
-        print("On the " + str(k) + " itteration we got: \n")
-        k += 1
-        print(tuple(sorted(c) for c in communities))
-    plt.show()
+    if(mode == 1):
+    	for communities in itertools.islice(comp, G.number_of_edges()):
+        	print("On the " + str(step) + " itteration we got: \n")
+        	step += 1
+        	print(tuple(sorted(c) for c in communities))
+    else:
 
+    	limited = itertools.takewhile(lambda c: len(c) <= k, comp)
+    	for communities in limited:
+        	tmp = nx_communities.modularity(G, communities)
+        	if(tmp > Q):
+        		Q = tmp
+        		communities_max = communities
+    	print("\nThe best division of graph is:\n")
+    	print(communities_max)
+    plt.show()
 
 def HITS():
     n = int(input("\nn = "))
@@ -99,7 +116,7 @@ def sub_menu_generator():
     print("2 - Genereate network based on Watts and Strogatz model\n")
     print("3 - Generate network based on BA model\n")
 
-    sub_choice = int(input())
+    sub_choice = safe_input()
 
     n = int(input("\nn = "))
 
@@ -122,15 +139,18 @@ def sub_menu_generator():
 def sub_menu_algorithms():
     print("Sub_menu for Algorithms:\n")
     print("1 - Hits algorithm\n")
-    print("2 - PageRank algorithm\n")
-    print("3 - Girvan - Newman algorithm\n")
+    print("2 - Girvan - Newman algorithm\n")
 
     sub_choice = safe_input()
 
-    if (sub_choice == 3):
-        GW_alg_demo()
+    if (sub_choice == 2):
+    	cls()
+    	print("1 - Work until there are edges in graph (get a Dendrogram)\n")
+    	print("2 - Stop at the maximum of modularity\n")
+    	mode = safe_input()
+        GW_alg_demo(mode)
         cls()
-    elif sub_choice == 1:
+    elif (sub_choice == 1):
         HITS()
         cls()
 

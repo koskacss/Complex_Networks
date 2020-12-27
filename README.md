@@ -8,3 +8,6 @@ Dependencies (last versions of):
 1) Tkinter 
 2) Matplotlib
 3) Networkx 
+
+
+P.S. PageRank is not available right now.

@@ -10,4 +10,4 @@ Dependencies (last versions of):
 3) Networkx 
 
 
-P.S. PageRank is not available right now.
+P.S. Do not generate graphs with more than 100 vertices.

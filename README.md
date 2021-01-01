@@ -10,4 +10,3 @@ Dependencies (last versions of):
 3) Networkx 
 
 
-P.S. Do not generate graphs with more than 100 vertices.

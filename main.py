@@ -137,80 +137,80 @@ def sub_menu_generator():
 
 
 def sub_menu_algorithms():
-    print("Sub_menu for Algorithms:\n")
-    print("1 - Hits algorithm\n")
-    print("2 - Girvan - Newman algorithm\n")
+	print("Sub_menu for Algorithms:\n")
+	print("1 - Hits algorithm\n")
+	print("2 - Girvan - Newman algorithm\n")
 
-    sub_choice = safe_input()
+	sub_choice = safe_input()
 
-    if (sub_choice == 2):
-    	cls()
-    	print("1 - Work until there are edges in graph (get a Dendrogram)\n")
-    	print("2 - Stop at the maximum of modularity\n")
-    	mode = safe_input()
-        GW_alg_demo(mode)
-        cls()
-    elif (sub_choice == 1):
-        HITS()
-        cls()
+	if (sub_choice == 2):
+		cls()
+		print("1 - Work until there are edges in graph (get a Dendrogram)\n")
+		print("2 - Stop at the maximum of modularity\n")
+		mode = safe_input()
+		GW_alg_demo(mode)
+		cls()
+	elif (sub_choice == 1):
+		HITS()
+		cls()
 
 
 def sub_menu_information():
-    print("If you want to generate net:\nParameter n is amount of verticies\n")
-    print("Parameter p is probability\n\nParameter m is amount of verticies of new node with already existed\n")
-    print("Parameter k is amount of nearest neighbours to vertex v")
-    print(
+	print("If you want to generate net:\nParameter n is amount of verticies\n")
+	print("Parameter p is probability\n\nParameter m is amount of verticies of new node with already existed\n")
+	print("Parameter k is amount of nearest neighbours to vertex v")
+ 	print(
         "\nIf you want to check GN algorithm:\nProgram will generate random graph and execute GN algorithm. Results will be showed in console or terminal")
-    print("\n\nType any digit to return...")
-    key = safe_input()
+	print("\n\nType any digit to return...")
+	key = safe_input()
 
 
 def print_menu():
-    cls()
-    print("Menu:\n")
-    print("1 - Generate network\n")
-    print("2 - Algorithms\n")
-    print("9 - Information\n")
-    print("0 - Exit\n")
+	cls()
+	print("Menu:\n")
+	print("1 - Generate network\n")
+	print("2 - Algorithms\n")
+	print("9 - Information\n")
+	print("0 - Exit\n")
 
 
 def cls():
-    os.system('cls' if os.name == 'nt' else 'clear')
+	os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def safe_input():
-    while (True):
-        try:
-            choice = int(input("Input >> "))
-        except Exception:
-            print("Error! Use only digits!")
-        else:
-            break
-    return choice
+	while (True):
+		try:
+			choice = int(input("Input >> "))
+		except Exception:
+			print("Error! Use only digits!")
+		else:
+			break
+	return choice
 
 
 def demo_start():
-    print_menu()
+	print_menu()
 
-    choice = safe_input()
+	choice = safe_input()
 
-    while (choice != 0):
+	while (choice != 0):
 
-        if (choice == 1):
-            cls()
-            sub_menu_generator()
-        elif (choice == 2):
-            cls()
-            sub_menu_algorithms()
-        elif (choice == 9):
-            cls()
-            sub_menu_information()
+		if (choice == 1):
+			cls()
+			sub_menu_generator()
+		elif (choice == 2):
+			cls()
+			sub_menu_algorithms()
+		elif (choice == 9):
+			cls()
+			sub_menu_information()
 
-        print_menu()
+		print_menu()
 
-        choice = safe_input()
+		choice = safe_input()
 
-        cls()
+		cls()
 
 
 demo_start()

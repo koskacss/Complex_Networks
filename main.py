@@ -52,10 +52,10 @@ def get_new_component(G, most_valuable_edge):
 def GW_alg_demo(mode):
     Q = 0.0
     step = 1
-    n = int(input("\nAmount of verticies in each group (2<=n<=30): "))
-    if(n > 30):
-        n/=30
-    G = nx.barbell_graph(n, 5)
+    n = int(input("\nAmount of verticies in each group and amount of groups (2<=n<=10): "))
+    if(n > 10):
+        n/=100
+    G = nx.connected_caveman_graph(n,n)
     nx.draw(G, with_labels=True, font_weight='bold')
     k = 2*n+4 
     comp = girvan_newman_algorithm(G)
@@ -66,7 +66,7 @@ def GW_alg_demo(mode):
             print(tuple(sorted(c) for c in communities))
     else:
 
-        limited = itertools.takewhile(lambda c: len(c) <= k, comp)
+        limited = itertools.takewhile(lambda c: len(c) < k, comp)
         for communities in limited:
             tmp = nx_communities.modularity(G, communities)
             if(tmp > Q):
